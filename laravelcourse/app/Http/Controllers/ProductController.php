@@ -39,4 +39,25 @@ public function show(string $id) : View|RedirectResponse
     $viewData["product"] = $product;
 
     return view('product.show')->with("viewData", $viewData);
-}}
+}
+
+public function create(): View
+{
+    $viewData = []; //to be sent to the view
+    $viewData["title"] = "Create product";
+
+    return view('product.create')->with("viewData",$viewData);
+}
+
+public function save(Request $request)
+{
+    $request->validate([
+    "name" => "required",
+    "price" => "required|numeric|min:1",
+    ]);
+
+//here will be the code to call the model and save it to the database
+    return view('product.success');
+}
+
+}
